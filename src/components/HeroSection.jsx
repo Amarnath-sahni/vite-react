@@ -79,7 +79,7 @@ const HeroSection = () => {
           👋 Hey, I'm <span className="text-yellow-400">Amarnath Sahni</span>
           <span className="block text-blue-200 mt-1 text-lg md:text-xl">
             <Typewriter
-              words={["A Full Stack Developer", "MERN Stack Specialist"]}
+              words={["A Software Developer", "MERN Stack Developer"]}
               loop={0}
               cursor
               cursorStyle="|"
@@ -92,11 +92,11 @@ const HeroSection = () => {
 
         {/* Description */}
         <h2 className="text-xl md:text-2xl text-gray-300 mt-3 font-light leading-relaxed tracking-wide">
-          I'm a final-year <span className="text-yellow-400 font-semibold">Computer Science</span> student and <span className="text-yellow-400 font-semibold">MERN Stack Developer</span> passionate about building modern digital solutions.
+          I'm a <span className="text-yellow-400 font-semibold">Software Developer</span> with hands-on experience across the full <span className="text-yellow-400 font-semibold">MERN stack</span>, building authentication systems, REST APIs, and AI-integrated web applications.
         </h2>
 
         <p className="mt-4 text-lg text-blue-200 font-medium border-l-4 border-yellow-400 pl-4 italic bg-amber-950">
-          Turning ideas into seamless web experiences with clean, structured, and maintainable code.
+          1st place hackathon winner and 300+ LeetCode problems solved — I turn ideas into seamless, production-ready web experiences.
         </p>
 
         {/* Contact Buttons */}
