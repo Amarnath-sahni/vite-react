@@ -110,7 +110,7 @@ const HeroSection = () => {
           <a href="https://wa.me/919142511468" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
             <FaWhatsapp className="mr-2" /> WhatsApp
           </a>
-          <a href="/CVec.docx" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          <a href="https://drive.google.com/file/d/11MkyNa5c6u2jW5kIWL8HpQ6UQ0O62nxV/view" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
             <FaFileAlt className="mr-2" /> View CV
           </a>
           <a href="https://github.com/Amarnath-sahni" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
