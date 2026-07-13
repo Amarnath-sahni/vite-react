@@ -63,14 +63,23 @@ const HeroSection = () => {
 
 
       {/* Profile Image */}
-      <motion.img
-        src="AmarnathPic.jpg"
-        alt="Amarnath Sahni"
-        className="w-40 h-60 md:w-64 md:h-64 object-cover rounded-full shadow-xl/30 mb-6 md:mb-0 md:mr-10 border-4 border-amber-200"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1 }}
-      />
+      <div className="relative mb-6 md:mb-0 md:mr-10">
+        {/* Glow behind the picture */}
+        <motion.div
+          className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400 via-cyan-400 to-pink-400 blur-2xl"
+          animate={{ opacity: [0.35, 0.6, 0.35] }}
+          transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+        />
+        <motion.img
+          src="AmarnathPic.jpg"
+          alt="Amarnath Sahni"
+          className="relative w-40 h-60 md:w-64 md:h-64 object-cover rounded-full shadow-xl/30 border-4 border-amber-200"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.05, borderColor: "#22d3ee" }}
+          transition={{ duration: 1 }}
+        />
+      </div>
 
       {/* Text & Buttons */}
       <div className="text-center md:text-left max-w-xl">
@@ -101,24 +110,56 @@ const HeroSection = () => {
 
         {/* Contact Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-          <a href="tel:+919142511468" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          <motion.a
+            href="tel:+919142511468"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(34,211,238,0.5)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-cyan-300"
+          >
             <FaPhoneAlt className="mr-2" /> +91 91425 11468
-          </a>
-          <a href="mailto:amarnathgithub@gmail.com" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          </motion.a>
+          <motion.a
+            href="mailto:amarnathgithub@gmail.com"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(250,204,21,0.5)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-yellow-300"
+          >
             <FaEnvelope className="mr-2" /> Email Me
-          </a>
-          <a href="https://wa.me/919142511468" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          </motion.a>
+          <motion.a
+            href="https://wa.me/919142511468"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(34,197,94,0.5)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-green-400"
+          >
             <FaWhatsapp className="mr-2" /> WhatsApp
-          </a>
-          <a href="https://drive.google.com/file/d/11MkyNa5c6u2jW5kIWL8HpQ6UQ0O62nxV/view" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          </motion.a>
+          <motion.a
+            href="https://drive.google.com/file/d/11MkyNa5c6u2jW5kIWL8HpQ6UQ0O62nxV/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(244,114,182,0.5)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-pink-300"
+          >
             <FaFileAlt className="mr-2" /> View CV
-          </a>
-          <a href="https://github.com/Amarnath-sahni" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          </motion.a>
+          <motion.a
+            href="https://github.com/Amarnath-sahni"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(255,255,255,0.4)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-gray-100"
+          >
             <FaGithub className="mr-2" /> GitHub
-          </a>
-          <a href="https://leetcode.com/u/Amarnath_sahni/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow transition duration-300">
+          </motion.a>
+          <motion.a
+            href="https://leetcode.com/u/Amarnath_sahni/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, backgroundColor: "#1f2937", boxShadow: "0 0 15px rgba(249,115,22,0.5)" }}
+            className="flex items-center justify-center text-white bg-gray-800 px-4 py-2 rounded-lg shadow transition-colors duration-300 hover:text-orange-400"
+          >
             <SiLeetcode className="mr-2" /> LeetCode
-          </a>
+          </motion.a>
         </div>
       </div>
     </motion.section>
