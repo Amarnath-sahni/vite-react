@@ -1,136 +1,127 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaTimes, FaFileAlt, FaPhoneAlt } from "react-icons/fa";
-import { FaNodeJs, FaReact, FaGitAlt, FaCode } from "react-icons/fa";
-import { SiMongodb, SiLeetcode } from "react-icons/si";
+import { FaTimes, FaFileAlt, FaPhoneAlt, FaLock, FaBolt, FaServer } from "react-icons/fa";
+import { FaNodeJs, FaReact, FaCode } from "react-icons/fa";
+import { SiMongodb, SiExpress, SiJsonwebtokens } from "react-icons/si";
 
-// --- Data ---
+// --- Data (sourced from resume) ---
 const experiences = [
   {
-id: 1,
-type: "Training",
-company: "Full Stack (MERN) Training – QSpiders",
-duration: "Jan 2024 - Mar 2024",
-techStack: [
-{ name: "Node.js", icon: FaNodeJs },
-{ name: "Express.js", icon: FaCode },
-{ name: "MongoDB", icon: SiMongodb },
-{ name: "React.js", icon: FaReact }
-],
-syllabus: [
-"Node.js Basics – Modules, Event Loop, Async Programming",
-"Express.js – Routing, Middleware, Error Handling",
-"MongoDB – Collections, CRUD Operations, Mongoose ODM",
-"React.js Basics – Components, Props, State, JSX",
-"React Router & SPA Navigation",
-"Authentication & Authorization (JWT, Cookies, Sessions)",
-"Building RESTful APIs – Versioning, Controllers, Services",
-"Environment Management & Secure Configuration",
-"File Uploads using Multer",
-"Deployment – Using Render or Vercel",
-"Real-world Mini Project – Full CRUD + Auth + DB Integration"
-],
-certificateLink: "https://drive.google.com/file/d/1gOhAuWEVoRM2-s7HjgE8xV-2kFz4r4hD/view?usp=sharing"
-},
+    id: 1,
+    type: "Internship",
+    company: "Full Stack Developer Intern — Speqto Pvt. Ltd.",
+    duration: "Dec 2025 – Feb 2026",
+    techStack: [
+      { name: "React.js", icon: FaReact },
+      { name: "JWT Auth", icon: SiJsonwebtokens },
+      { name: "REST APIs", icon: FaServer },
+    ],
+    highlights: [
+      "Built reusable React.js UI components adopted across multiple features, improving consistency and reducing duplicate front-end code.",
+      "Implemented JWT authentication, protected routing, and paginated REST API endpoints for core application data.",
+      "Collaborated with designers and stakeholders to translate business requirements into production-ready features.",
+      "Improved component rendering performance using React.memo and lazy loading.",
+    ],
+  },
   {
     id: 2,
     type: "Internship",
-    company: "Backend Development Summer Intenship – Vital Skill",
-    duration: "June 2024 - August 2024",
+    company: "MERN Stack Developer Intern — Q Spiders",
+    duration: "Jul 2025 – Dec 2025",
     techStack: [
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "Express.js", icon: SiExpress },
+      { name: "React.js", icon: FaReact },
       { name: "Node.js", icon: FaNodeJs },
-      { name: "Express.js", icon: FaCode },
-      { name: "MongoDB", icon: SiMongodb }
     ],
-    syllabus: [
-      "Node.js Basics – Modules, Event Loop, Async Programming",
-      "Express.js – Routing, Middleware, Error Handling",
-      "MongoDB – Collections, CRUD Operations, Mongoose ODM",
-      "Authentication & Authorization (JWT, Cookies, Sessions)",
-      "Building RESTful APIs – Versioning, Controllers, Services",
-      "Environment Management & Secure Configuration",
-      "Error Handling & Validation using Joi / Custom Middleware",
-      "API Rate Limiting, CORS, Helmet, and Security Practices",
-      "File Uploads using Multer",
-      "Deployment – Using Render, Vercel, or Railway",
-      "Database Hosting & Connection with Cloud MongoDB (Atlas)",
-      "Real-world Mini Project – Full CRUD + Auth + DB Integration"
+    highlights: [
+      "Built full-stack applications end-to-end using MongoDB, Express.js, React.js, and Node.js (MERN stack).",
+      "Developed authentication systems and protected routes for database-driven features across multiple projects.",
+      "Integrated frontend applications with REST APIs and backend services for real-world project deliverables.",
+      "Optimized MongoDB queries with indexing to reduce average API response times.",
     ],
-    certificateLink:
-      "https://drive.google.com/file/d/1gOhAuWEVoRM2-s7HjgE8xV-2kFz4r4hD/view?usp=sharing"
   },
-  
 ];
+
+// --- Reusable hover transition (gives the "lingering" feel) ---
+const hoverSpring = { type: "spring", stiffness: 260, damping: 20, mass: 0.6 };
 
 // --- Helper: Icon badge ---
 const IconBadge = ({ Icon, label, onClick }) => (
-  <button
+  <motion.button
     onClick={onClick}
-    className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/90 text-black shadow-sm hover:scale-105 transform transition"
+    whileHover={{ scale: 1.08, backgroundColor: "#ffffff" }}
+    whileTap={{ scale: 0.97 }}
+    transition={hoverSpring}
+    className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/90 text-black shadow-sm"
     aria-label={label}
   >
     <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-black text-lg shadow-sm">
       <Icon />
     </span>
     <span className="hidden sm:inline-block font-medium text-sm">{label}</span>
-  </button>
+  </motion.button>
 );
 
 // --- Slide Panel (opens from right) ---
-const TechSlide = ({ open, onClose, techName, syllabus }) => {
+const TechSlide = ({ open, onClose, techName, highlights }) => {
   return (
     <AnimatePresence>
       {open && (
-        <motion.aside
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ type: "tween", duration: 0.45 }}
-          className="fixed inset-y-0 right-0 w-full sm:w-[480px] z-50"
-        >
-          <div className="h-full bg-gradient-to-b from-black/90 via-[#0b1220]/80 to-black/95 backdrop-blur-md border-l border-white/10 p-6 overflow-auto">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-2xl font-bold">{techName}</h3>
-                <p className="text-sm text-gray-300 mt-1">Suggested syllabus — curated by experts</p>
-              </div>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-md bg-white/10 hover:bg-white/20 transition"
-                aria-label="Close panel"
-              >
-                <FaTimes className="text-white" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="text-lg font-semibold">Full Syllabus / Roadmap</h4>
-              <ul className="list-disc pl-5 text-sm text-gray-200 space-y-2">
-                {syllabus.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ul>
-
-              <div className="mt-6 p-4 rounded-lg bg-white/5 border border-white/6">
-                <h5 className="font-semibold">How to study (expert tips)</h5>
-                <ol className="list-decimal pl-5 text-sm mt-2 text-gray-200 space-y-1">
-                  <li>Start with fundamentals and build small projects.</li>
-                  <li>Read official docs and follow one guided course.</li>
-                  <li>Reproduce real-world mini projects & deploy them.</li>
-                  <li>Practice problem-solving (DSA) for backend roles.</li>
-                  <li>Contribute to open-source and showcase projects on GitHub.</li>
-                </ol>
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/50 z-40"
+          />
+          <motion.aside
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.45, ease: "easeInOut" }}
+            className="fixed inset-y-0 right-0 w-full sm:w-[480px] z-50"
+          >
+            <div className="h-full bg-gradient-to-b from-black/90 via-[#0b1220]/80 to-black/95 backdrop-blur-md border-l border-white/10 p-6 overflow-auto">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold">{techName}</h3>
+                  <p className="text-sm text-gray-300 mt-1">What I worked on with this stack</p>
+                </div>
+                <motion.button
+                  onClick={onClose}
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.25)" }}
+                  transition={hoverSpring}
+                  className="p-2 rounded-md bg-white/10"
+                  aria-label="Close panel"
+                >
+                  <FaTimes className="text-white" />
+                </motion.button>
               </div>
 
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-white text-black font-medium shadow"
-              >
-                <FaPhoneAlt /> Need mentorship?
-              </a>
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold">Highlights</h4>
+                <ul className="list-disc pl-5 text-sm text-gray-200 space-y-2">
+                  {highlights.map((s, i) => (
+                    <li key={i}>{s}</li>
+                  ))}
+                </ul>
+
+                <motion.a
+                  href="#contact"
+                  whileHover={{ scale: 1.04, backgroundColor: "#f3f4f6" }}
+                  transition={hoverSpring}
+                  className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-white text-black font-medium shadow"
+                >
+                  <FaPhoneAlt /> Let's talk about this
+                </motion.a>
+              </div>
             </div>
-          </div>
-        </motion.aside>
+          </motion.aside>
+        </>
       )}
     </AnimatePresence>
   );
@@ -140,14 +131,14 @@ const TechSlide = ({ open, onClose, techName, syllabus }) => {
 export default function ExperienceSection() {
   const [openIndex, setOpenIndex] = useState(null);
   const [slideOpen, setSlideOpen] = useState(false);
-  const [selectedTech, setSelectedTech] = useState({ name: "", syllabus: [] });
+  const [selectedTech, setSelectedTech] = useState({ name: "", highlights: [] });
 
   const toggleDetails = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const openTechSlide = (techName, syllabus) => {
-    setSelectedTech({ name: techName, syllabus });
+  const openTechSlide = (techName, highlights) => {
+    setSelectedTech({ name: techName, highlights });
     setSlideOpen(true);
   };
 
@@ -156,10 +147,10 @@ export default function ExperienceSection() {
   return (
     <section className="min-h-screen py-16 bg-gradient-to-b from-[#020617] via-[#070b12] to-[#04060a] text-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-extrabold text-center mb-8">Experience & Training</h2>
+        <h2 className="text-4xl font-extrabold text-center mb-8">Experience</h2>
         <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">
-          Hand-picked trainings and workshops — click a technology to open an expert-curated
-          syllabus with study guidance.
+          Two internships building production features across the MERN stack. Click a technology
+          badge to see exactly what I shipped with it.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -167,8 +158,10 @@ export default function ExperienceSection() {
             <motion.article
               key={exp.id}
               initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              whileHover={{ y: -4, borderColor: "rgba(255,255,255,0.25)" }}
               className="relative rounded-2xl p-6 bg-white/5 backdrop-blur-sm border border-white/6 shadow-lg"
             >
               {/* Top row: Type + Company */}
@@ -179,65 +172,52 @@ export default function ExperienceSection() {
                   <p className="text-sm text-gray-400 mt-1">{exp.duration}</p>
                 </div>
 
-                <div className="flex flex-col items-end gap-3">
-                  <a
-                    href={exp.certificateLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/90 text-black shadow-sm hover:scale-105 transform transition"
-                  >
-                    <FaFileAlt />
-                    <span className="hidden sm:inline">Certificate</span>
-                  </a>
-
-                  <button
-                    onClick={() => toggleDetails(index)}
-                    className="px-3 py-2 rounded-lg text-sm bg-white/6 hover:bg-white/10 transition"
-                  >
-                    {openIndex === index ? "Hide" : "View"}
-                  </button>
-                </div>
+                <motion.button
+                  onClick={() => toggleDetails(index)}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.14)" }}
+                  transition={hoverSpring}
+                  className="shrink-0 px-3 py-2 rounded-lg text-sm bg-white/6"
+                >
+                  {openIndex === index ? "Hide" : "View"}
+                </motion.button>
               </div>
 
               {/* Content */}
               <div className="mt-5 space-y-4">
-                <p className="text-gray-300">Brief: Hands-on training, projects and real-world workflows.</p>
-
                 {/* Tech stack badges */}
                 <div className="flex flex-wrap gap-3 mt-2">
                   {exp.techStack.map((t, i) => {
                     const Icon = t.icon;
                     return (
-                      <div key={i} className="">
-                        <IconBadge
-                          Icon={Icon}
-                          label={t.name}
-                          onClick={() => openTechSlide(t.name, exp.syllabus)}
-                        />
-                      </div>
+                      <IconBadge
+                        key={i}
+                        Icon={Icon}
+                        label={t.name}
+                        onClick={() => openTechSlide(t.name, exp.highlights)}
+                      />
                     );
                   })}
                 </div>
 
                 {/* Expandable details */}
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {openIndex === index && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.35 }}
-                      className="overflow-hidden mt-4"
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className="overflow-hidden"
                     >
                       <div className="p-4 rounded-lg bg-white/3 border border-white/6 text-sm text-gray-100">
-                        <h4 className="font-semibold mb-2">Learning Concepts</h4>
+                        <h4 className="font-semibold mb-2">Key Highlights</h4>
                         <ul className="list-disc pl-5 space-y-1">
-                          {exp.syllabus.slice(0, 6).map((s, i) => (
+                          {exp.highlights.map((s, i) => (
                             <li key={i}>{s}</li>
                           ))}
                         </ul>
                         <p className="mt-3 text-xs text-gray-300">
-                          Click any technology above to open the full syllabus in a slide panel.
+                          Click any technology badge above to see it in its own panel.
                         </p>
                       </div>
                     </motion.div>
@@ -254,7 +234,7 @@ export default function ExperienceSection() {
         open={slideOpen}
         onClose={closeTechSlide}
         techName={selectedTech.name}
-        syllabus={selectedTech.syllabus}
+        highlights={selectedTech.highlights}
       />
     </section>
   );
