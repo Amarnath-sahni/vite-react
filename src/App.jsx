@@ -5,6 +5,8 @@ import AchievementsSection from './components/AchievementsSection.jsx';
 import ProjectsSection from './components/ProjectsSection.jsx';
 import Footer from './components/Footer.jsx';
 import FeedbackSection from './components/FeedbackSection.jsx';
+import SkillsSection from './components/SkillsSection.jsx';
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
      
           <HeroSection />
           <Exprience />
+      <SkillsSection/>
           <ProjectsSection />
           <AchievementsSection />
           <FeedbackSection />
