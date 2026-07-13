@@ -43,7 +43,7 @@ const projects = [
       "Built a complete MERN financial management platform with AI integration for intelligent expense analysis and better budgeting decisions.",
 
     github:
-      "https://github.com/Amarnath-sahni/Expense_Feontend",
+      "https://github.com/Amarnath-sahni/Expense_Management_System-Backend-Frontend",
 
     live:
       "#",
@@ -85,7 +85,7 @@ const projects = [
       "Developed an AI healthcare platform by integrating a CNN deep learning model with a full-stack application for automated MRI analysis.",
 
     github:
-      "#",
+      "https://github.com/Amarnath-sahni/Brain_tumor_AI",
 
     live:
       "#",
@@ -123,7 +123,7 @@ const projects = [
       "Created a scalable rental platform with authentication, property management and user review functionality.",
 
     github:
-      "https://github.com/Amarnath-sahni/HomeStay",
+      "https://github.com/Amarnath-sahni/Hotel_Booking_System_adminPannel",
 
     live:
       "#",
