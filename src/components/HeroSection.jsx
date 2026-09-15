@@ -71,7 +71,7 @@ const HeroSection = () => {
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
         />
         <motion.img
-          src="AmarnathPic.jpg"
+          src="AkPicture.jpeg"
           alt="Amarnath Sahni"
           className="relative w-40 h-60 md:w-64 md:h-64 object-cover rounded-full shadow-xl/30 border-4 border-amber-200"
           initial={{ scale: 0.8, opacity: 0 }}
